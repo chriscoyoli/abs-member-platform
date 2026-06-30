@@ -6,32 +6,32 @@
 <title>Proposal · A Brilliant Shine · Member Booking & Recurring Revenue Platform</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0a0a0a; --paper:#ffffff; --red:#e01933; --red2:#ff3b52;
-    --grey:#5c5c5c; --faint:#8a8a8a; --line:#e7e7e7; --soft:#f5f5f5; --softer:#fafafa;
-    --disp:'Oswald','Inter',sans-serif; --body:'Inter',-apple-system,sans-serif;
+    --ink:#0a0a0a; --paper:#ffffff; --pink:#ff0a78; --pink2:#e60067;
+    --grey:#5c5c63; --faint:#8a8a90; --line:#e7e7e9; --soft:#f5f5f7; --softer:#fafafb;
+    --disp:'Montserrat','Inter',sans-serif; --body:'Inter',-apple-system,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:#3a3a3a;font-family:var(--body);color:var(--ink);
+  body{background:#d9d9dd;font-family:var(--body);color:var(--ink);
     display:flex;justify-content:center;padding:26px 14px;-webkit-font-smoothing:antialiased}
   .page{width:8.5in;min-height:11in;background:var(--paper);position:relative;overflow:hidden;
-    box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
+    box-shadow:0 30px 80px -20px rgba(0,0,0,.4)}
 
   /* header band */
-  .head{background:var(--ink);color:#fff;padding:26px 40px 30px;position:relative;overflow:hidden}
+  .head{background:#0a0a0b;color:#fff;padding:26px 40px 30px;position:relative;overflow:hidden}
   .head::after{content:"";position:absolute;top:0;right:-60px;width:240px;height:100%;
-    background:linear-gradient(115deg,transparent 40%,rgba(224,25,51,.9) 41% 58%,transparent 59%);opacity:.9}
+    background:linear-gradient(115deg,transparent 40%,rgba(255,10,120,.95) 41% 58%,transparent 59%);opacity:.95}
   .toprow{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:2}
-  .cvt{font-family:var(--disp);font-weight:600;font-size:12px;letter-spacing:.30em;text-transform:uppercase}
+  .cvt{font-family:var(--disp);font-weight:700;font-size:12px;letter-spacing:.26em;text-transform:uppercase}
   .cvt small{display:block;font-family:var(--body);font-weight:400;font-size:9px;letter-spacing:.12em;
-    color:#bdbdbd;margin-top:5px;text-transform:none}
-  .meta{text-align:right;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#cfcfcf}
-  .title{font-family:var(--disp);font-weight:700;font-size:34px;line-height:1.02;letter-spacing:-.01em;
+    color:#bdbdc4;margin-top:5px;text-transform:none}
+  .meta{text-align:right;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#cfcfd4}
+  .title{font-family:var(--disp);font-weight:800;font-size:33px;line-height:1.04;letter-spacing:.005em;
     margin-top:24px;position:relative;z-index:2;text-transform:uppercase}
-  .title .r{color:var(--red2)}
-  .for{font-size:12px;color:#d4d4d4;margin-top:10px;position:relative;z-index:2;letter-spacing:.02em}
+  .title .r{color:var(--pink)}
+  .for{font-size:12px;color:#d4d4d8;margin-top:10px;position:relative;z-index:2;letter-spacing:.02em}
   .for b{color:#fff;font-weight:600}
 
   /* body grid */
@@ -41,60 +41,60 @@
 
   .sec{margin-bottom:20px}
   .sec:last-child{margin-bottom:0}
-  .eyebrow{font-family:var(--disp);font-weight:600;font-size:12px;letter-spacing:.20em;text-transform:uppercase;
-    color:var(--red);display:flex;align-items:center;gap:9px;margin-bottom:9px}
-  .eyebrow::before{content:"";width:16px;height:2px;background:var(--red)}
+  .eyebrow{font-family:var(--disp);font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--pink2);display:flex;align-items:center;gap:9px;margin-bottom:9px}
+  .eyebrow::before{content:"";width:16px;height:2px;background:var(--pink)}
   .p{font-size:11.5px;line-height:1.62;color:#2b2b2b}
   .p+.p{margin-top:7px}
   ul.clean{list-style:none;margin-top:9px;display:flex;flex-direction:column;gap:6px}
   ul.clean li{font-size:11px;line-height:1.5;color:#333;padding-left:16px;position:relative}
-  ul.clean li::before{content:"";position:absolute;left:0;top:6px;width:6px;height:6px;background:var(--red);
+  ul.clean li::before{content:"";position:absolute;left:0;top:6px;width:6px;height:6px;background:var(--pink);
     transform:rotate(45deg)}
   ul.clean li b{font-weight:600;color:var(--ink)}
-  .link{color:var(--red);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(224,25,51,.35)}
+  .link{color:var(--pink2);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(255,10,120,.4)}
 
   /* stack box */
   .stack{border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:10px}
   .stackrow{display:flex;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line);align-items:baseline}
   .stackrow:last-child{border-bottom:none}
-  .stackrow .lab{font-family:var(--disp);font-weight:600;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;
+  .stackrow .lab{font-family:var(--disp);font-weight:700;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;
     color:var(--ink);width:96px;flex:none}
   .stackrow .desc{font-size:10.5px;line-height:1.45;color:#444}
-  .stackrow .desc b{color:var(--red);font-weight:600}
+  .stackrow .desc b{color:var(--pink2);font-weight:600}
 
   /* sidebar */
   .side .eyebrow{font-size:11px}
   .stat{margin-bottom:13px}
-  .stat .big{font-family:var(--disp);font-weight:700;font-size:25px;color:var(--ink);line-height:1}
-  .stat .big i{color:var(--red);font-style:normal}
+  .stat .big{font-family:var(--disp);font-weight:800;font-size:25px;color:var(--ink);line-height:1}
+  .stat .big i{color:var(--pink2);font-style:normal}
   .stat .cap{font-size:9.5px;line-height:1.45;color:var(--grey);margin-top:4px}
 
   .phase{display:flex;gap:10px;margin-bottom:11px}
   .phase .num{font-family:var(--disp);font-weight:700;font-size:13px;color:#fff;background:var(--ink);
     width:22px;height:22px;border-radius:50%;display:grid;place-items:center;flex:none}
-  .phase.done .num{background:var(--red)}
-  .phase .pt{font-family:var(--disp);font-weight:600;font-size:11px;letter-spacing:.04em;text-transform:uppercase}
+  .phase.done .num{background:var(--pink)}
+  .phase .pt{font-family:var(--disp);font-weight:700;font-size:11px;letter-spacing:.04em;text-transform:uppercase}
   .phase .ps{font-size:9.5px;line-height:1.45;color:var(--grey);margin-top:2px}
 
-  .invest{background:var(--ink);color:#fff;border-radius:9px;padding:15px 16px;margin-top:4px}
-  .invest h4{font-family:var(--disp);font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-    color:var(--red2);margin-bottom:11px}
+  .invest{background:#0a0a0b;color:#fff;border-radius:9px;padding:15px 16px;margin-top:4px}
+  .invest h4{font-family:var(--disp);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--pink);margin-bottom:11px}
   .invest .line{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.12)}
   .invest .line:last-of-type{border-bottom:none}
-  .invest .it{font-size:10.5px;color:#e4e4e4}.invest .it small{display:block;color:#9c9c9c;font-size:9px;margin-top:2px}
-  .invest .amt{font-family:var(--disp);font-weight:700;font-size:15px;color:#fff;white-space:nowrap}
-  .invest .note{font-size:8.5px;color:#9c9c9c;margin-top:9px;line-height:1.4}
+  .invest .it{font-size:10.5px;color:#e4e4e4}.invest .it small{display:block;color:#9c9ca3;font-size:9px;margin-top:2px}
+  .invest .amt{font-family:var(--disp);font-weight:800;font-size:15px;color:#fff;white-space:nowrap}
+  .invest .note{font-size:8.5px;color:#9c9ca3;margin-top:9px;line-height:1.4}
 
   .cta{margin-top:14px}
-  .cta .h{font-family:var(--disp);font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase}
+  .cta .h{font-family:var(--disp);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
   .cta .t{font-size:10px;color:var(--grey);line-height:1.5;margin-top:5px}
   .contact{font-size:10px;color:var(--ink);margin-top:9px;line-height:1.6}
-  .contact b{font-family:var(--disp);font-weight:600;letter-spacing:.03em}
+  .contact b{font-family:var(--disp);font-weight:700;letter-spacing:.03em}
   .edit{color:var(--faint)}
 
-  .foot{border-top:2px solid var(--ink);padding:11px 40px;display:flex;justify-content:space-between;
+  .foot{border-top:2px solid var(--pink);padding:11px 40px;display:flex;justify-content:space-between;
     align-items:center;font-size:9px;letter-spacing:.08em;color:var(--faint);text-transform:uppercase}
-  .foot .fb{font-family:var(--disp);font-weight:600;color:var(--ink);letter-spacing:.18em}
+  .foot .fb{font-family:var(--disp);font-weight:700;color:var(--ink);letter-spacing:.18em}
 
   @media print{
     body{background:#fff;padding:0}
@@ -147,7 +147,7 @@
         <ul class="clean">
           <li><b>Self-serve booking</b> with card held at booking to end no-shows.</li>
           <li><b>Membership tiers and credit packs</b> that convert washes into monthly revenue.</li>
-          <li><b>Ceramic warranty upkeep</b> productized as a recurring service.</li>
+          <li><b>Fleet management</b> so multi-car owners book each vehicle separately.</li>
           <li><b>Owner dashboard</b> showing recurring revenue, members, and open quote pipeline.</li>
         </ul>
         <p class="p" style="margin-top:9px">Working prototype: <a class="link" href="demo.html">open the member app</a></p>
