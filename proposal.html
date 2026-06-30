@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposal · A Brilliant Shine · Member Booking & Recurring Revenue Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0a0a; --paper:#ffffff; --red:#e01933; --red2:#ff3b52;
+    --grey:#5c5c5c; --faint:#8a8a8a; --line:#e7e7e7; --soft:#f5f5f5; --softer:#fafafa;
+    --disp:'Oswald','Inter',sans-serif; --body:'Inter',-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#3a3a3a;font-family:var(--body);color:var(--ink);
+    display:flex;justify-content:center;padding:26px 14px;-webkit-font-smoothing:antialiased}
+  .page{width:8.5in;min-height:11in;background:var(--paper);position:relative;overflow:hidden;
+    box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
+
+  /* header band */
+  .head{background:var(--ink);color:#fff;padding:26px 40px 30px;position:relative;overflow:hidden}
+  .head::after{content:"";position:absolute;top:0;right:-60px;width:240px;height:100%;
+    background:linear-gradient(115deg,transparent 40%,rgba(224,25,51,.9) 41% 58%,transparent 59%);opacity:.9}
+  .toprow{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:2}
+  .cvt{font-family:var(--disp);font-weight:600;font-size:12px;letter-spacing:.30em;text-transform:uppercase}
+  .cvt small{display:block;font-family:var(--body);font-weight:400;font-size:9px;letter-spacing:.12em;
+    color:#bdbdbd;margin-top:5px;text-transform:none}
+  .meta{text-align:right;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#cfcfcf}
+  .title{font-family:var(--disp);font-weight:700;font-size:34px;line-height:1.02;letter-spacing:-.01em;
+    margin-top:24px;position:relative;z-index:2;text-transform:uppercase}
+  .title .r{color:var(--red2)}
+  .for{font-size:12px;color:#d4d4d4;margin-top:10px;position:relative;z-index:2;letter-spacing:.02em}
+  .for b{color:#fff;font-weight:600}
+
+  /* body grid */
+  .body{display:grid;grid-template-columns:1.55fr 1fr;gap:0}
+  .main{padding:26px 30px 24px 40px}
+  .side{padding:26px 36px 24px 26px;background:var(--soft);border-left:1px solid var(--line)}
+
+  .sec{margin-bottom:20px}
+  .sec:last-child{margin-bottom:0}
+  .eyebrow{font-family:var(--disp);font-weight:600;font-size:12px;letter-spacing:.20em;text-transform:uppercase;
+    color:var(--red);display:flex;align-items:center;gap:9px;margin-bottom:9px}
+  .eyebrow::before{content:"";width:16px;height:2px;background:var(--red)}
+  .p{font-size:11.5px;line-height:1.62;color:#2b2b2b}
+  .p+.p{margin-top:7px}
+  ul.clean{list-style:none;margin-top:9px;display:flex;flex-direction:column;gap:6px}
+  ul.clean li{font-size:11px;line-height:1.5;color:#333;padding-left:16px;position:relative}
+  ul.clean li::before{content:"";position:absolute;left:0;top:6px;width:6px;height:6px;background:var(--red);
+    transform:rotate(45deg)}
+  ul.clean li b{font-weight:600;color:var(--ink)}
+  .link{color:var(--red);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(224,25,51,.35)}
+
+  /* stack box */
+  .stack{border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:10px}
+  .stackrow{display:flex;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line);align-items:baseline}
+  .stackrow:last-child{border-bottom:none}
+  .stackrow .lab{font-family:var(--disp);font-weight:600;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--ink);width:96px;flex:none}
+  .stackrow .desc{font-size:10.5px;line-height:1.45;color:#444}
+  .stackrow .desc b{color:var(--red);font-weight:600}
+
+  /* sidebar */
+  .side .eyebrow{font-size:11px}
+  .stat{margin-bottom:13px}
+  .stat .big{font-family:var(--disp);font-weight:700;font-size:25px;color:var(--ink);line-height:1}
+  .stat .big i{color:var(--red);font-style:normal}
+  .stat .cap{font-size:9.5px;line-height:1.45;color:var(--grey);margin-top:4px}
+
+  .phase{display:flex;gap:10px;margin-bottom:11px}
+  .phase .num{font-family:var(--disp);font-weight:700;font-size:13px;color:#fff;background:var(--ink);
+    width:22px;height:22px;border-radius:50%;display:grid;place-items:center;flex:none}
+  .phase.done .num{background:var(--red)}
+  .phase .pt{font-family:var(--disp);font-weight:600;font-size:11px;letter-spacing:.04em;text-transform:uppercase}
+  .phase .ps{font-size:9.5px;line-height:1.45;color:var(--grey);margin-top:2px}
+
+  .invest{background:var(--ink);color:#fff;border-radius:9px;padding:15px 16px;margin-top:4px}
+  .invest h4{font-family:var(--disp);font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--red2);margin-bottom:11px}
+  .invest .line{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+  .invest .line:last-of-type{border-bottom:none}
+  .invest .it{font-size:10.5px;color:#e4e4e4}.invest .it small{display:block;color:#9c9c9c;font-size:9px;margin-top:2px}
+  .invest .amt{font-family:var(--disp);font-weight:700;font-size:15px;color:#fff;white-space:nowrap}
+  .invest .note{font-size:8.5px;color:#9c9c9c;margin-top:9px;line-height:1.4}
+
+  .cta{margin-top:14px}
+  .cta .h{font-family:var(--disp);font-weight:600;font-size:12px;letter-spacing:.10em;text-transform:uppercase}
+  .cta .t{font-size:10px;color:var(--grey);line-height:1.5;margin-top:5px}
+  .contact{font-size:10px;color:var(--ink);margin-top:9px;line-height:1.6}
+  .contact b{font-family:var(--disp);font-weight:600;letter-spacing:.03em}
+  .edit{color:var(--faint)}
+
+  .foot{border-top:2px solid var(--ink);padding:11px 40px;display:flex;justify-content:space-between;
+    align-items:center;font-size:9px;letter-spacing:.08em;color:var(--faint);text-transform:uppercase}
+  .foot .fb{font-family:var(--disp);font-weight:600;color:var(--ink);letter-spacing:.18em}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .page{box-shadow:none;width:auto;min-height:auto}
+    @page{size:Letter;margin:0}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+  @media(max-width:880px){
+    .page{width:100%}
+    .body{grid-template-columns:1fr}
+    .side{border-left:none;border-top:1px solid var(--line)}
+    .main,.side{padding:24px 22px}
+    .head{padding:22px 22px 26px}
+    .title{font-size:27px}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="head">
+    <div class="toprow">
+      <div class="cvt">Carmel Valley Technologies
+        <small>Silicon Valley technology, Carmel Valley soul</small>
+      </div>
+      <div class="meta">Proposal<br>June 2026</div>
+    </div>
+    <div class="title">Member Booking &amp;<br><span class="r">Recurring Revenue</span> Platform</div>
+    <div class="for">Prepared for <b>A Brilliant Shine</b> · Ceramic Pro Elite of Carmel Valley</div>
+  </div>
+
+  <div class="body">
+    <!-- MAIN -->
+    <div class="main">
+
+      <div class="sec">
+        <div class="eyebrow">The opportunity</div>
+        <p class="p">A Brilliant Shine has the reputation and the work. What it does not have yet is a way for clients to book, prepay, and stay on a schedule without a phone tag. Today that friction quietly costs the shop money:</p>
+        <ul class="clean">
+          <li>Booking runs on texts and manual callbacks, so customers wait days for a slot and some never rebook.</li>
+          <li>No deposit at booking means every no-show on a coating bay is an empty, unpaid day.</li>
+          <li>One-time washes leave the most valuable thing on the table: <b>predictable monthly revenue</b>.</li>
+          <li>High-ticket PPF and coating quotes get one follow-up, then go cold.</li>
+        </ul>
+      </div>
+
+      <div class="sec">
+        <div class="eyebrow">The platform</div>
+        <p class="p">A branded, mobile-first member experience on the shop's own domain. Clients see real availability, book and prepay, buy credit packs, and choose pickup and delivery. Members lock a recurring cadence, so upkeep books itself. A second flow captures high-ticket protection quotes and turns them into reserved consults.</p>
+        <ul class="clean">
+          <li><b>Self-serve booking</b> with card held at booking to end no-shows.</li>
+          <li><b>Membership tiers and credit packs</b> that convert washes into monthly revenue.</li>
+          <li><b>Ceramic warranty upkeep</b> productized as a recurring service.</li>
+          <li><b>Owner dashboard</b> showing recurring revenue, members, and open quote pipeline.</li>
+        </ul>
+        <p class="p" style="margin-top:9px">Working prototype: <a class="link" href="demo.html">open the member app</a></p>
+      </div>
+
+      <div class="sec">
+        <div class="eyebrow">Recommended stack</div>
+        <p class="p">The branded experience sits on a proven, detailing-native spine, so we are configuring industry tools rather than maintaining custom plumbing.</p>
+        <div class="stack">
+          <div class="stackrow"><div class="lab">Booking spine</div><div class="desc"><b>Urable</b>: built for ceramic coating, PPF and tint shops. Online booking with deposits on every plan, warranty and batch tracking, and a 3D vehicle visualizer that closes high-ticket installs. (~$70–$220/mo)</div></div>
+          <div class="stackrow"><div class="lab">Payments</div><div class="desc"><b>Stripe</b> for deposits, prepaid credits, and recurring memberships, connected through Urable.</div></div>
+          <div class="stackrow"><div class="lab">Front end</div><div class="desc"><b>Branded member app</b> on the A Brilliant Shine domain, wired to the booking and payment layer.</div></div>
+          <div class="stackrow"><div class="lab">Automation</div><div class="desc">Rebooking reminders, review requests, and quote follow-ups, with a light AI layer for the messaging.</div></div>
+        </div>
+        <p class="p" style="margin-top:8px;color:var(--grey);font-size:10px">Credible alternatives by budget: OrbisX (flat-rate all-in-one), QuoteIQ (AI-native, low entry), or Square Appointments (simplest start).</p>
+      </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="side">
+
+      <div class="sec">
+        <div class="eyebrow">Why it pays</div>
+        <div class="stat"><div class="big"><i>$1,800</i>/yr</div><div class="cap">A customer moved from one-off washes to a monthly plan, instead of a single payment. (industry benchmark)</div></div>
+        <div class="stat"><div class="big">82% <span style="font-size:13px;color:var(--grey)">vs</span> 58%</div><div class="cap">Annual members renew far more often than month-to-month.</div></div>
+        <div class="stat"><div class="big"><i>+15–25%</i></div><div class="cap">Typical revenue lift from tiered pricing, plus fewer no-shows from deposits at booking.</div></div>
+      </div>
+
+      <div class="sec">
+        <div class="eyebrow">Scope &amp; timeline</div>
+        <div class="phase done"><div class="num">1</div><div><div class="pt">Prototype · complete</div><div class="ps">Branded member and owner demo built and ready to show.</div></div></div>
+        <div class="phase"><div class="num">2</div><div><div class="pt">Build &amp; configure</div><div class="ps">Stand up Urable, set tiers, deposits, payments, and the branded front end.</div></div></div>
+        <div class="phase"><div class="num">3</div><div><div class="pt">Launch &amp; automate</div><div class="ps">Quote capture, reminders, training, go live. Roughly 3–4 weeks total.</div></div></div>
+      </div>
+
+      <div class="sec">
+        <div class="invest">
+          <h4>Investment</h4>
+          <div class="line"><div class="it">Launch package<small>Design, build, configure, train</small></div><div class="amt">$5,500</div></div>
+          <div class="line"><div class="it">Growth care plan<small>Updates, automation tuning, monthly report</small></div><div class="amt">$400<span style="font-size:10px">/mo</span></div></div>
+          <div class="note">One-time launch plus an optional monthly care plan. Platform subscription (Urable, Stripe fees) is billed to the shop separately. Figures illustrative and adjustable to final scope.</div>
+        </div>
+      </div>
+
+      <div class="cta">
+        <div class="h">Next step</div>
+        <div class="t">A 30-minute walkthrough of the live demo, then we confirm pricing and your real service menu and set a launch date.</div>
+        <div class="contact"><b>Chris Coyoli</b><br>Carmel Valley Technologies<br>carmelvalleytechnologies.com<br>chris@coyoli.com<span class="edit"> · [your phone]</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Confidential proposal · prepared for A Brilliant Shine</span>
+    <span class="fb">CVT</span>
+  </div>
+
+</div>
+</body>
+</html>

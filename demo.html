@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Brilliant Shine · Member Experience (Concept)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0a0a; --paper:#ffffff;
+    --bg:#e8e8ea; --surface:#ffffff; --surface2:#f4f4f5; --soft:#fafafa;
+    --line:#e6e6e8; --line2:#f0f0f1;
+    --text:#0a0a0a; --muted:#5b5b60; --faint:#9092a0;
+    --accent:#e01933; --accent2:#ff2d45; --good:#1f9d55; --warn:#cf8a00; --bad:#c0392b;
+    --radius:18px;
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --disp:'Oswald','Inter',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--sans);
+    background:radial-gradient(120% 80% at 50% -10%, #f3f3f4 0%, #ebebed 45%, var(--bg) 100%);
+    color:var(--text);min-height:100dvh;display:flex;align-items:center;justify-content:center;
+    padding:24px 16px;-webkit-font-smoothing:antialiased;
+  }
+  /* device shell */
+  .device{
+    width:100%;max-width:420px;height:min(860px,calc(100dvh - 48px));
+    background:var(--paper);
+    border:1px solid #dcdce0;border-radius:36px;
+    box-shadow:0 50px 120px -34px rgba(20,20,25,.45), 0 4px 14px -6px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.9);
+    overflow:hidden;position:relative;display:flex;flex-direction:column;
+  }
+  @media(max-width:480px){
+    body{padding:0}
+    .device{max-width:none;height:100dvh;border-radius:0;border:none;box-shadow:none}
+  }
+  .scroll{flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;background:var(--paper)}
+  .scroll::-webkit-scrollbar{display:none}
+
+  /* top bar */
+  .topbar{
+    position:sticky;top:0;z-index:20;padding:16px 18px 13px;
+    background:rgba(255,255,255,.86);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  }
+  .brandrow{display:flex;align-items:center;justify-content:space-between}
+  .wordmark{display:flex;flex-direction:column;line-height:1}
+  .wordmark .logo{height:30px;width:auto;max-width:230px;object-fit:contain;display:block}
+  .wordmark .name{
+    font-family:var(--disp);font-weight:600;font-size:14.5px;letter-spacing:.34em;
+    text-transform:uppercase;position:relative;color:var(--ink);
+    background:linear-gradient(100deg,var(--ink) 0 40%,var(--accent) 50%,var(--ink) 60% 100%);
+    background-size:240% 100%;-webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;animation:sheen 7s ease-in-out infinite;
+  }
+  .wordmark .sub{font-size:8.5px;letter-spacing:.28em;color:var(--faint);text-transform:uppercase;margin-top:6px}
+  @keyframes sheen{0%,55%{background-position:140% 0}80%,100%{background-position:-40% 0}}
+
+  .modetoggle{display:flex;background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:3px}
+  .modetoggle button{
+    font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.04em;color:var(--muted);
+    background:transparent;border:none;border-radius:999px;padding:6px 11px;cursor:pointer;transition:.2s;
+  }
+  .modetoggle button.on{background:var(--accent);color:#ffffff;box-shadow:0 4px 12px -4px rgba(224,25,51,.5)}
+
+  /* generic */
+  .pad{padding:14px 18px 28px}
+  .eyebrow{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .h1{font-family:var(--disp);font-weight:600;font-size:25px;letter-spacing:-.01em;margin:6px 0 4px;line-height:1.12;text-transform:uppercase}
+  .h2{font-family:var(--disp);font-weight:600;font-size:17px;letter-spacing:-.005em}
+  .lead{color:var(--muted);font-size:13.5px;line-height:1.5}
+  .muted{color:var(--muted)}
+  .faint{color:var(--faint)}
+  .row{display:flex;gap:10px}
+  .between{display:flex;align-items:center;justify-content:space-between}
+  .mt{margin-top:18px}.mt2{margin-top:26px}.mts{margin-top:10px}
+  .seclabel{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .seclabel .act{font-size:11.5px;color:var(--accent);font-weight:600;cursor:pointer;background:none;border:none;font-family:var(--sans)}
+  .seclabel .act:hover{text-decoration:underline}
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--line);border-radius:var(--radius);padding:16px;
+    position:relative;overflow:hidden;box-shadow:0 1px 2px rgba(16,16,20,.04),0 8px 24px -18px rgba(16,16,20,.25);
+  }
+  .card.dark{background:var(--ink);border-color:#1c1c1c;color:#fff;
+    box-shadow:0 14px 36px -18px rgba(0,0,0,.55)}
+  .card.dark::after{content:"";position:absolute;top:0;right:0;width:104px;height:84px;z-index:0;
+    background:linear-gradient(128deg,transparent 50%,rgba(224,25,51,.9) 57% 70%,transparent 77%);pointer-events:none}
+  .card.dark>*{position:relative;z-index:1}
+  .card.dark .h1,.card.dark .h2{color:#fff}
+  .card.dark .muted{color:#bdbdbd}
+  .card.dark .faint{color:#9a9a9a}
+
+  .card.glossy::before{
+    content:"";position:absolute;inset:0;z-index:0;
+    background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.18) 46%,transparent 60%);
+    background-size:300% 100%;animation:gloss 7s ease-in-out infinite;pointer-events:none;
+  }
+  @keyframes gloss{0%,60%{background-position:160% 0}85%,100%{background-position:-60% 0}}
+
+  .tile{
+    width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);
+    border-radius:14px;padding:14px;cursor:pointer;transition:.18s;color:var(--text);
+    font-family:var(--sans);display:flex;align-items:center;gap:13px;
+    box-shadow:0 1px 2px rgba(16,16,20,.03);
+  }
+  .tile:hover{border-color:rgba(224,25,51,.5);transform:translateY(-1px);box-shadow:0 10px 24px -16px rgba(224,25,51,.55)}
+  .tile .ic{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;flex:none;
+    background:linear-gradient(180deg,#fbfbfc,#f1f1f3);border:1px solid var(--line);color:var(--accent)}
+  .tile .tx{flex:1;min-width:0}
+  .tile .tt{font-weight:600;font-size:14px}
+  .tile .ts{font-size:11.5px;color:var(--muted);margin-top:2px}
+  .tile .chev{color:var(--faint);font-size:18px}
+
+  /* vehicle cards */
+  .veh{padding:15px}
+  .veh+.veh{margin-top:10px}
+  .vtop{display:flex;align-items:center;gap:13px}
+  .vic{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;flex:none;
+    background:linear-gradient(180deg,#fbfbfc,#eeeef0);border:1px solid var(--line);color:var(--ink)}
+  .vic svg,.ic svg,.fic svg,.ico{display:block}
+  .vmeta{flex:1;min-width:0}
+  .vnm{font-family:var(--disp);font-weight:600;font-size:16px;letter-spacing:.01em}
+  .vsub{font-size:11.5px;color:var(--muted);margin-top:2px}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:500;margin-top:8px;
+    color:var(--muted);background:var(--soft);border:1px solid var(--line);padding:5px 10px;border-radius:999px}
+  .chip .cd{width:6px;height:6px;border-radius:50%;flex:none}
+  .vacts{display:flex;gap:8px;margin-top:14px}
+  .vacts .btn{padding:11px;font-size:12.5px;border-radius:11px}
+  .addveh{width:100%;border:1px dashed #cfcfd4;background:var(--soft);border-radius:14px;padding:14px;
+    font-family:var(--sans);font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;transition:.15s;
+    display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px}
+  .addveh:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* form fields */
+  .field{margin-top:16px}
+  .field label{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .input{width:100%;margin-top:7px;padding:12px 13px;border:1px solid var(--line);border-radius:12px;
+    font-family:var(--sans);font-size:14px;background:var(--surface);color:var(--text);transition:.15s}
+  .input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(224,25,51,.1)}
+  select.input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235b5b60' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+
+  .selrow{display:flex;align-items:center;gap:12px;padding:13px 14px;border:1px solid var(--line);
+    border-radius:13px;cursor:pointer;transition:.15s;background:var(--surface)}
+  .selrow:hover{border-color:rgba(224,25,51,.45);background:var(--soft)}
+  .selrow.sel{border-color:var(--accent);background:linear-gradient(180deg,rgba(224,25,51,.07),rgba(224,25,51,.02));box-shadow:0 8px 22px -16px rgba(224,25,51,.5)}
+  .selrow .nm{font-weight:600;font-size:13.5px}
+  .selrow .ds{font-size:11px;color:var(--muted);margin-top:2px}
+  .selrow .pr{margin-left:auto;font-family:var(--disp);font-weight:600;font-size:14px}
+  .tag{display:inline-block;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;
+    color:var(--accent);background:rgba(224,25,51,.09);border:1px solid rgba(224,25,51,.28);
+    padding:2px 7px;border-radius:999px;margin-top:6px}
+
+  /* time grid */
+  .week{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+  .week::-webkit-scrollbar{display:none}
+  .day{flex:none;width:52px;text-align:center;padding:9px 0;border:1px solid var(--line);border-radius:12px;
+    background:var(--surface);cursor:pointer;transition:.15s}
+  .day.sel{border-color:var(--accent);background:linear-gradient(180deg,rgba(224,25,51,.08),transparent)}
+  .day .dow{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+  .day .dn{font-family:var(--disp);font-weight:600;font-size:16px;margin-top:3px}
+  .slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .slot{padding:11px 0;text-align:center;border:1px solid var(--line);border-radius:11px;background:var(--surface);
+    font-size:12.5px;font-weight:500;cursor:pointer;transition:.15s}
+  .slot.sel{border-color:var(--accent);background:linear-gradient(180deg,rgba(224,25,51,.08),transparent);color:var(--accent)}
+  .slot.off{opacity:.4;cursor:not-allowed;text-decoration:line-through}
+
+  /* buttons */
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;font-family:var(--sans);
+    font-weight:600;font-size:14px;padding:15px;border-radius:14px;border:none;cursor:pointer;transition:.18s}
+  .btn.primary{background:linear-gradient(180deg,var(--accent2),var(--accent));color:#ffffff;
+    box-shadow:0 12px 28px -12px rgba(224,25,51,.6)}
+  .btn.primary:hover{filter:brightness(1.04);transform:translateY(-1px)}
+  .btn.ghost{background:var(--surface);border:1px solid var(--line);color:var(--text)}
+  .btn.ghost:hover{border-color:rgba(224,25,51,.45);background:var(--soft)}
+  .btn.red{background:var(--surface);border:1px solid rgba(224,25,51,.5);color:var(--accent)}
+  .btn.red:hover{background:rgba(224,25,51,.06)}
+  .btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none;transform:none}
+  .back{background:none;border:none;color:var(--muted);font-family:var(--sans);font-size:13px;
+    cursor:pointer;display:flex;align-items:center;gap:6px;padding:2px 0;margin-bottom:4px}
+  .back:hover{color:var(--ink)}
+
+  /* sticky footer cta */
+  .cta-bar{position:sticky;bottom:0;padding:14px 18px 18px;
+    background:linear-gradient(0deg,#ffffff 62%,rgba(255,255,255,0));z-index:15}
+
+  /* membership tiers */
+  .tier{border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--surface);position:relative;overflow:hidden;
+    box-shadow:0 1px 2px rgba(16,16,20,.04)}
+  .tier.feat{border-color:rgba(224,25,51,.5);background:linear-gradient(180deg,rgba(224,25,51,.05),var(--surface));
+    box-shadow:0 14px 34px -22px rgba(224,25,51,.55)}
+  .tier .tname{font-family:var(--disp);font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:.02em}
+  .tier .price{font-family:var(--disp);font-weight:700;font-size:26px;margin-top:8px}
+  .tier .price span{font-size:12px;font-weight:500;color:var(--muted)}
+  .tier .val{font-size:11px;color:var(--accent);margin-top:2px}
+  .tier ul{list-style:none;margin:12px 0 14px;display:flex;flex-direction:column;gap:7px}
+  .tier li{font-size:12px;color:var(--muted);display:flex;gap:8px;align-items:flex-start}
+  .tier li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:6px;flex:none}
+
+  /* owner dashboard */
+  .kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .kpi .card{padding:14px}
+  .kpi .lab{font-size:10.5px;letter-spacing:.04em;color:var(--muted);text-transform:uppercase}
+  .kpi .num{font-family:var(--disp);font-weight:700;font-size:23px;margin-top:6px;letter-spacing:-.02em}
+  .kpi .delta{font-size:10.5px;margin-top:3px;color:var(--good)}
+  .chart{display:flex;align-items:flex-end;gap:8px;height:120px;margin-top:14px}
+  .bar{flex:1;border-radius:7px 7px 3px 3px;background:linear-gradient(180deg,#e7e7ea,#f2f2f4);position:relative;transition:height .6s cubic-bezier(.2,.7,.2,1)}
+  .bar.hl{background:linear-gradient(180deg,var(--accent2),var(--accent))}
+  .bar span{position:absolute;bottom:-18px;left:0;right:0;text-align:center;font-size:9px;color:var(--faint)}
+  .feed{display:flex;flex-direction:column;gap:1px;border-radius:13px;overflow:hidden;border:1px solid var(--line)}
+  .fitem{display:flex;gap:11px;align-items:center;padding:12px 13px;background:var(--surface)}
+  .fitem .fic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--surface2);border:1px solid var(--line);color:var(--accent);flex:none}
+  .fitem .ft{font-size:12.5px;font-weight:500}
+  .fitem .fs{font-size:10.5px;color:var(--faint);margin-top:1px}
+  .fitem .fv{margin-left:auto;font-family:var(--disp);font-weight:600;font-size:13px;color:var(--good)}
+
+  .divider{height:1px;background:var(--line2);margin:20px 0}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);
+    background:var(--surface);border:1px solid var(--line);padding:6px 11px;border-radius:999px}
+  .card.dark .pill{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);color:#e4e4e4}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--good);box-shadow:0 0 8px rgba(31,157,85,.7)}
+
+  .footer{padding:22px 18px 30px;text-align:center;border-top:1px solid var(--line2);margin-top:10px}
+  .footer .fw{font-family:var(--disp);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint)}
+  .footer .fm{font-size:10.5px;color:var(--faint);margin-top:8px;line-height:1.5}
+
+  /* toast */
+  .toast{position:absolute;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);border:1px solid #1c1c1c;color:#fff;padding:12px 16px;border-radius:12px;
+    font-size:12.5px;font-weight:500;box-shadow:0 16px 40px -12px rgba(0,0,0,.45);opacity:0;
+    transition:.28s;z-index:60;max-width:88%;text-align:center}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .toast b{color:var(--accent2)}
+
+  .checkline{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted);padding:8px 0}
+  .checkline .ck{color:var(--accent);font-size:15px}
+  .switch{display:flex;align-items:center;justify-content:space-between;background:var(--surface);
+    border:1px solid var(--line);border-radius:13px;padding:13px 14px;cursor:pointer}
+  .toggle{width:44px;height:25px;border-radius:999px;background:#d4d4d8;position:relative;transition:.2s;flex:none}
+  .toggle.on{background:var(--accent)}
+  .toggle::after{content:"";position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:50%;
+    background:#fff;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+  .toggle.on::after{left:22px}
+
+  @media(prefers-reduced-motion:reduce){
+    .wordmark .name,.card.glossy::before{animation:none}
+    *{transition:none!important}
+  }
+</style>
+</head>
+<body>
+  <div class="device">
+    <div class="topbar">
+      <div class="brandrow">
+        <div class="wordmark">
+          <img class="logo" src="https://mby.pca.org/wp-content/uploads/ABrilliantShine-sponsor-logo.png" alt="A Brilliant Shine"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <div class="name" style="display:none">A Brilliant Shine</div>
+          <div class="sub" style="margin-top:7px">Ceramic Pro Elite · Carmel Valley</div>
+        </div>
+        <div class="modetoggle">
+          <button id="mMember" class="on" onclick="setMode('member')">Member</button>
+          <button id="mOwner" onclick="setMode('owner')">Owner</button>
+        </div>
+      </div>
+    </div>
+    <div class="scroll" id="app"></div>
+    <div class="toast" id="toast"></div>
+  </div>
+
+<script>
+/* ---------- state ---------- */
+const state = {
+  mode:'member', screen:'home',
+  credits:2, tier:'Signature',
+  selVehicle:null,
+  vehicles:[
+    {id:'p912',  nm:'1968 Porsche 912', sub:'Ivory', ic:'carSport', statusKey:'armor',   next:'Aug 4'},
+    {id:'cyber', nm:'Tesla Cybertruck', sub:'Stainless', ic:'truck', statusKey:'due',  next:'Overdue'},
+    {id:'rover', nm:'Range Rover', sub:'Santorini Black', ic:'suv', statusKey:'none', next:'—'},
+  ],
+  booking:{vehicle:null, service:null, price:0, day:null, time:null, logistics:'dropoff'},
+  quote:{type:null, coverage:null},
+  rebook:false,
+  upcoming:null,
+  owner:{ mrr:7340, members:22, weekBookings:14, pipeline:18650 }
+};
+
+const STATUS = {
+  armor:{t:'Ultimate Armor active', c:'var(--good)'},
+  ceramic:{t:'Ceramic coating active', c:'var(--good)'},
+  due:{t:'Maintenance due', c:'var(--warn)'},
+  none:{t:'No protection plan', c:'var(--faint)'},
+};
+
+/* ---------- icon set (custom line icons, brand black/red) ---------- */
+const ICONS = {
+  shield:'<path d="M12 3l7 2.6v5.2c0 4.3-2.9 7.4-7 8.9-4.1-1.5-7-4.6-7-8.9V5.6L12 3z"/>',
+  shieldcheck:'<path d="M12 3l7 2.6v5.2c0 4.3-2.9 7.4-7 8.9-4.1-1.5-7-4.6-7-8.9V5.6L12 3z"/><path d="M8.8 11.6l2.1 2.1 4-4.2"/>',
+  check:'<path d="M5 12.5l4.5 4.5L19 7"/>',
+  droplet:'<path d="M12 3.5s5.5 6 5.5 9.8A5.5 5.5 0 0 1 6.5 13.3C6.5 9.5 12 3.5 12 3.5z"/>',
+  sparkle:'<path d="M12 4l1.7 4.6L18 10l-4.3 1.4L12 16l-1.7-4.6L6 10l4.3-1.4L12 4z"/><path d="M18.5 14.5l.7 1.9 1.9.7-1.9.7-.7 1.9-.7-1.9-1.9-.7 1.9-.7.7-1.9z"/>',
+  steering:'<circle cx="12" cy="12" r="8.2"/><circle cx="12" cy="12" r="2.2"/><path d="M12 14.2v6M10.1 12.6L4.8 14.7M13.9 12.6l5.3 2.1"/>',
+  wheel:'<circle cx="12" cy="12" r="8.2"/><circle cx="12" cy="12" r="3"/><path d="M12 3.8v3.4M12 16.8v3.4M3.8 12h3.4M16.8 12h3.4"/>',
+  diamond:'<path d="M3 9l4-5h10l4 5-9 11L3 9z"/><path d="M3 9h18M9 4l-1.5 5L12 20M15 4l1.5 5L12 20"/>',
+  layers:'<path d="M12 3.5l8.5 4.2L12 12 3.5 7.7 12 3.5z"/><path d="M3.5 12L12 16.3 20.5 12M3.5 16.3L12 20.6l8.5-4.3"/>',
+  window:'<rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 11h16M12 5v6"/>',
+  plus:'<path d="M12 5.5v13M5.5 12h13"/>',
+  loop:'<path d="M4.5 10a7.5 7.5 0 0 1 12.7-3.4L20 9"/><path d="M19.5 14a7.5 7.5 0 0 1-12.7 3.4L4 15"/><path d="M20 5v4h-4M4 19v-4h4"/>',
+  star:'<path d="M12 4l2.3 4.8 5.2.7-3.8 3.7.9 5.2L12 16.6l-4.6 2.5.9-5.2-3.8-3.7 5.2-.7L12 4z"/>',
+  carSport:'<path d="M2.5 15c0-.6.4-1 1-1l1.6-.2 2.2-3c.4-.5 1-.8 1.6-.8h6c.6 0 1.1.2 1.5.7l2 2.4 1.6.4c.6.1 1 .6 1 1.2V15"/><circle cx="7.3" cy="16" r="2"/><circle cx="16.7" cy="16" r="2"/>',
+  truck:'<path d="M2.5 15v-1.6l8.5-4h3l7.5 3.6V15"/><path d="M11 9.4v-1l3.5-.9"/><circle cx="7.3" cy="16" r="2"/><circle cx="16.7" cy="16" r="2"/>',
+  suv:'<path d="M3 15v-4.4c0-.6.4-1 1-1h11.5c.4 0 .8.2 1 .6L19 13l1.4.4c.6.2 1 .7 1 1.3V15"/><path d="M7 10v3M11.5 10v3M16 10.6v2.4"/><circle cx="7.3" cy="16" r="2"/><circle cx="16.7" cy="16" r="2"/>',
+  car:'<path d="M3 15v-1c0-.5.3-.9.9-1l1.5-.2 2.1-3c.4-.5 1-.8 1.6-.8h5.8c.6 0 1.1.2 1.5.7l2 2.5 1.5.4c.6.1 1 .6 1 1.2V14"/><circle cx="7.3" cy="16" r="2"/><circle cx="16.7" cy="16" r="2"/>',
+};
+function svg(name,o){o=o||{};return `<svg class="ico" viewBox="0 0 24 24" width="${o.s||22}" height="${o.s||22}" fill="none" stroke="${o.c||'currentColor'}" stroke-width="${o.w||1.7}" stroke-linecap="round" stroke-linejoin="round">${ICONS[name]||''}</svg>`}
+
+const services = [
+  {id:'maint', nm:'Maintenance Wash', ds:'Hand wash · spray sealant · interior wipe', pr:95, ic:'droplet', tag:null},
+  {id:'cmaint', nm:'Ceramic Maintenance', ds:'Decon + coating booster · keeps warranty valid', pr:145, ic:'shieldcheck', tag:'Warranty service'},
+  {id:'sig', nm:'Signature Detail', ds:'Full exterior + interior · paint-safe', pr:295, ic:'sparkle', tag:null},
+  {id:'int', nm:'Interior Reset', ds:'Deep interior · leather conditioning', pr:175, ic:'steering', tag:null},
+  {id:'wheel', nm:'Wheels & Calipers', ds:'Faces, barrels, calipers detailed', pr:85, ic:'wheel', tag:null},
+];
+
+const tiers = [
+  {id:'ess', nm:'Essential', pr:129, val:'1 maintenance wash / mo · $40 value over single', feat:false,
+   feats:['Monthly maintenance wash','Member booking & priority slots','Coating warranty reminders']},
+  {id:'sig', nm:'Signature', pr:249, val:'Most popular · ~$160 value over single', feat:true,
+   feats:['2 maintenance washes / mo','Quarterly Signature Detail','Priority weekend scheduling','10% off PPF & coatings']},
+  {id:'con', nm:'Concours', pr:449, val:'Full white-glove · concierge included', feat:false,
+   feats:['Everything in Signature','Monthly ceramic maintenance','Pickup & delivery included','Warranty fully managed for you']},
+];
+
+const days = [
+  {dow:'Mon',dn:14,off:false},{dow:'Tue',dn:15,off:true},{dow:'Wed',dn:16,off:false},
+  {dow:'Thu',dn:17,off:false},{dow:'Fri',dn:18,off:false},{dow:'Sat',dn:19,off:false},{dow:'Sun',dn:20,off:true},
+];
+const slots = [
+  {t:'8:00',off:false},{t:'9:30',off:true},{t:'11:00',off:false},
+  {t:'12:30',off:false},{t:'2:00',off:false},{t:'3:30',off:true},
+];
+
+/* ---------- helpers ---------- */
+const $ = id => document.getElementById(id);
+const app = $('app');
+function money(n){return '$'+n.toLocaleString('en-US')}
+function go(s){state.screen=s; render(); app.scrollTop=0}
+function toast(html){const t=$('toast');t.innerHTML=html;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2600)}
+function veh(id){return state.vehicles.find(v=>v.id===id)}
+function curVeh(){return veh(state.selVehicle) || state.vehicles[0]}
+function chip(key){const s=STATUS[key]||STATUS.none;return `<span class="chip"><span class="cd" style="background:${s.c}"></span>${s.t}</span>`}
+
+function setMode(m){
+  state.mode=m;$('mMember').classList.toggle('on',m==='member');$('mOwner').classList.toggle('on',m==='owner');
+  state.screen = m==='owner' ? 'owner' : 'home'; render(); app.scrollTop=0;
+}
+
+/* ---------- member: home ---------- */
+function homeScreen(){
+  const up = state.upcoming;
+  return `
+  <div class="pad">
+    <div class="eyebrow">Membership</div>
+    <div class="card dark glossy mt" style="margin-top:10px">
+      <div class="between">
+        <div>
+          <div class="eyebrow" style="color:var(--accent2)">${state.tier} Member</div>
+          <div class="h2" style="margin-top:6px">${state.credits} service credits</div>
+        </div>
+        <div class="vic" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);color:#fff">${svg('shield',{s:24})}</div>
+      </div>
+      <div class="divider" style="margin:14px 0;background:rgba(255,255,255,.12)"></div>
+      <div class="between">
+        <span class="pill"><span class="dot"></span> Coating warranty active</span>
+        <span class="faint" style="font-size:11.5px">Renews monthly</span>
+      </div>
+    </div>
+    <button class="btn ghost mt" style="margin-top:10px" onclick="go('membership')">Manage membership &amp; credits</button>
+
+    ${ up ? `
+    <div class="card mt" style="margin-top:18px">
+      <div class="between">
+        <div><div class="eyebrow">Upcoming</div>
+        <div class="h2" style="margin-top:6px">${up.service}</div>
+        <div class="muted" style="font-size:12px;margin-top:3px">${up.vehicle} · Sat Jun ${up.day} · ${up.time} · ${up.logistics==='concierge'?'Pickup & delivery':'Drop-off'}</div></div>
+        <div class="vic">${svg(up.ic,{s:26})}</div>
+      </div>
+    </div>` : ''}
+
+    <div class="seclabel mt2" style="margin-top:26px">
+      <div class="eyebrow">Your garage</div>
+      <span class="faint" style="font-size:11px">${state.vehicles.length} vehicles</span>
+    </div>
+    ${state.vehicles.map(v=>`
+      <div class="card veh">
+        <div class="vtop">
+          <div class="vic">${svg(v.ic,{s:28})}</div>
+          <div class="vmeta">
+            <div class="vnm">${v.nm}</div>
+            <div class="vsub">${v.sub}</div>
+            ${chip(v.statusKey)}
+          </div>
+        </div>
+        <div class="vacts">
+          <button class="btn red" onclick="bookFor('${v.id}')">Book service</button>
+          <button class="btn ghost" onclick="editVehicle('${v.id}')">Edit</button>
+        </div>
+      </div>`).join('')}
+    <button class="addveh" onclick="addVehicle()">${svg('plus',{s:16})} Add a vehicle</button>
+
+    <div class="tile mt2" style="margin-top:24px" onclick="openQuote()">
+      <div class="ic">${svg('shield',{s:20})}</div><div class="tx"><div class="tt">Get a protection quote</div><div class="ts">PPF · ceramic coating · window tint</div></div><div class="chev">›</div>
+    </div>
+
+    ${footer()}
+  </div>`;
+}
+
+/* ---------- vehicle: edit ---------- */
+function editVehicle(id){state.selVehicle=id;go('vehicleEdit')}
+function addVehicle(){state.selVehicle=null;go('vehicleEdit')}
+function vehicleEdit(){
+  const v = state.selVehicle ? veh(state.selVehicle) : {nm:'',sub:'',statusKey:'none'};
+  const isNew = !state.selVehicle;
+  const opts = [['armor','Ultimate Armor active'],['ceramic','Ceramic coating active'],['due','Maintenance due'],['none','No protection plan']];
+  return `<div class="pad">
+    <button class="back" onclick="go('home')">‹ Garage</button>
+    <div class="eyebrow">${isNew?'Add vehicle':'Edit vehicle'}</div>
+    <div class="h1">${isNew?'Add a vehicle':'Edit details'}</div>
+    <div class="field">
+      <label>Vehicle</label>
+      <input class="input" id="vfName" placeholder="e.g. 2025 Porsche 911" value="${v.nm}">
+    </div>
+    <div class="field">
+      <label>Color / trim</label>
+      <input class="input" id="vfColor" placeholder="e.g. GT Silver" value="${v.sub}">
+    </div>
+    <div class="field">
+      <label>Protection status</label>
+      <select class="input" id="vfStatus">
+        ${opts.map(o=>`<option value="${o[0]}" ${v.statusKey===o[0]?'selected':''}>${o[1]}</option>`).join('')}
+      </select>
+    </div>
+  </div>
+  <div class="cta-bar">
+    ${isNew?'':`<button class="btn ghost" style="margin-bottom:9px" onclick="removeVehicle()">Remove vehicle</button>`}
+    <button class="btn primary" onclick="saveVehicle()">${isNew?'Add vehicle':'Save changes'}</button>
+  </div>`;
+}
+function saveVehicle(){
+  const nm=$('vfName').value.trim()||'New vehicle';
+  const sub=$('vfColor').value.trim();
+  const statusKey=$('vfStatus').value;
+  if(state.selVehicle){const v=veh(state.selVehicle);v.nm=nm;v.sub=sub;v.statusKey=statusKey;}
+  else{state.vehicles.push({id:'v'+Date.now(),nm,sub,ic:'car',statusKey,next:'—'});}
+  toast('Vehicle saved');go('home');
+}
+function removeVehicle(){
+  state.vehicles=state.vehicles.filter(v=>v.id!==state.selVehicle);
+  toast('Vehicle removed');go('home');
+}
+
+/* ---------- booking (scoped to a vehicle) ---------- */
+function bookFor(id){
+  state.selVehicle=id;
+  state.booking={vehicle:id, service:null, price:0, day:null, time:null, logistics:'dropoff'};
+  go('bookService');
+}
+function bookService(){
+  const v=veh(state.booking.vehicle)||state.vehicles[0];
+  return `<div class="pad">
+    <button class="back" onclick="go('home')">‹ Garage</button>
+    <div class="eyebrow">Book a service · Step 1 of 4</div>
+    <div class="h1">Choose your service</div>
+    <div class="muted mts" style="font-size:12.5px;margin-top:8px">For <b style="color:var(--ink)">${v.nm}</b> · ${v.sub}</div>
+    <div style="display:flex;flex-direction:column;gap:9px;margin-top:16px">
+      ${services.map(s=>`
+        <div class="selrow ${state.booking.service===s.id?'sel':''}" onclick="pickService('${s.id}')">
+          <div class="vic" style="width:34px;height:34px;border-radius:10px;background:var(--surface2)">${svg(s.ic,{s:18})}</div>
+          <div><div class="nm">${s.nm}</div><div class="ds">${s.ds}</div>${s.tag?`<span class="tag">${s.tag}</span>`:''}</div>
+          <div class="pr">${money(s.pr)}</div>
+        </div>`).join('')}
+    </div>
+  </div>
+  <div class="cta-bar">
+    <button class="btn primary" ${state.booking.service?'':'disabled'} onclick="go('bookTime')">Continue</button>
+  </div>`;
+}
+function pickService(id){const s=services.find(x=>x.id===id);state.booking.service=id;state.booking.price=s.pr;render()}
+
+function bookTime(){
+  return `<div class="pad">
+    <button class="back" onclick="go('bookService')">‹ Service</button>
+    <div class="eyebrow">Book a service · Step 2 of 4</div>
+    <div class="h1">Pick a time</div>
+    <div class="muted mts" style="font-size:12.5px;margin-top:8px">June 2026 · Carmel Valley shop</div>
+    <div class="week mt" style="margin-top:14px">
+      ${days.map(d=>`<div class="day ${state.booking.day===d.dn?'sel':''} ${d.off?'off':''}" ${d.off?'':`onclick="pickDay(${d.dn})"`} style="${d.off?'opacity:.3;pointer-events:none':''}">
+        <div class="dow">${d.dow}</div><div class="dn">${d.dn}</div></div>`).join('')}
+    </div>
+    <div class="eyebrow mt" style="margin-top:20px">Available slots</div>
+    <div class="slots mt" style="margin-top:12px">
+      ${slots.map(s=>`<div class="slot ${state.booking.time===s.t?'sel':''} ${s.off?'off':''}" ${s.off?'':`onclick="pickTime('${s.t}')"`}>${s.t}</div>`).join('')}
+    </div>
+  </div>
+  <div class="cta-bar">
+    <button class="btn primary" ${state.booking.day&&state.booking.time?'':'disabled'} onclick="go('bookLogistics')">Continue</button>
+  </div>`;
+}
+function pickDay(d){state.booking.day=d;render()}
+function pickTime(t){state.booking.time=t;render()}
+
+function bookLogistics(){
+  const l=state.booking.logistics;
+  return `<div class="pad">
+    <button class="back" onclick="go('bookTime')">‹ Time</button>
+    <div class="eyebrow">Book a service · Step 3 of 4</div>
+    <div class="h1">Drop-off or concierge?</div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
+      <div class="selrow ${l==='dropoff'?'sel':''}" onclick="setLog('dropoff')">
+        <div><div class="nm">I'll drop it off</div><div class="ds">4 Village Dr #2, Carmel Valley</div></div>
+        <div class="pr">Free</div>
+      </div>
+      <div class="selrow ${l==='concierge'?'sel':''}" onclick="setLog('concierge')">
+        <div><div class="nm">Pickup & delivery</div><div class="ds">We collect and return your car</div></div>
+        <div class="pr">+$45</div>
+      </div>
+    </div>
+    ${l==='concierge'?`<div class="card mt" style="margin-top:12px;padding:13px">
+      <div class="muted" style="font-size:12px">Pickup address</div>
+      <div style="font-weight:600;margin-top:3px;font-size:13.5px">15513 Via La Gitana, Carmel Valley</div>
+    </div>`:''}
+  </div>
+  <div class="cta-bar">
+    <button class="btn primary" onclick="go('bookPay')">Continue</button>
+  </div>`;
+}
+function setLog(v){state.booking.logistics=v;render()}
+
+function bookPay(){
+  const s=services.find(x=>x.id===state.booking.service);
+  const v=veh(state.booking.vehicle)||state.vehicles[0];
+  const con = state.booking.logistics==='concierge'?45:0;
+  const total = s.pr+con;
+  return `<div class="pad">
+    <button class="back" onclick="go('bookLogistics')">‹ Logistics</button>
+    <div class="eyebrow">Book a service · Step 4 of 4</div>
+    <div class="h1">Confirm & pay</div>
+    <div class="card mt" style="margin-top:16px">
+      <div class="between"><span class="muted" style="font-size:13px">Vehicle</span><span style="font-weight:600">${v.nm}</span></div>
+      <div class="between mts"><span class="muted" style="font-size:13px">${s.nm}</span><span style="font-weight:600">${money(s.pr)}</span></div>
+      ${con?`<div class="between mts"><span class="muted" style="font-size:13px">Pickup & delivery</span><span style="font-weight:600">${money(con)}</span></div>`:''}
+      <div class="between mts"><span class="muted" style="font-size:13px">Sat Jun ${state.booking.day} · ${state.booking.time}</span><span class="faint" style="font-size:12px">Carmel Valley</span></div>
+      <div class="divider" style="margin:13px 0"></div>
+      <div class="between"><span class="h2">Total</span><span class="h2">${money(total)}</span></div>
+    </div>
+
+    <div class="mt" style="margin-top:14px;display:flex;flex-direction:column;gap:9px">
+      ${state.credits>0?`<button class="btn ghost" onclick="confirmBooking(true)">Use 1 service credit · ${state.credits} left</button>`:''}
+      <button class="btn primary" onclick="confirmBooking(false)">Pay ${money(total)} now</button>
+    </div>
+    <div class="checkline mt" style="margin-top:14px"><span class="ck">✓</span> Card held at booking · no surprise no-shows</div>
+  </div>`;
+}
+function confirmBooking(useCredit){
+  if(useCredit&&state.credits>0)state.credits--;
+  const v=veh(state.booking.vehicle)||state.vehicles[0];
+  const s=services.find(x=>x.id===state.booking.service);
+  state.upcoming={service:s.nm, vehicle:v.nm, ic:v.ic, day:state.booking.day, time:state.booking.time, logistics:state.booking.logistics};
+  go('bookConfirm');
+}
+
+function bookConfirm(){
+  const s=services.find(x=>x.id===state.booking.service);
+  const v=veh(state.booking.vehicle)||state.vehicles[0];
+  const shortNm=v.nm.split(' ').slice(-1)[0];
+  return `<div class="pad" style="text-align:center;padding-top:40px">
+    <div style="width:74px;height:74px;border-radius:50%;margin:0 auto;display:grid;place-items:center;
+      background:radial-gradient(120% 120% at 30% 20%,rgba(224,25,51,.16),rgba(224,25,51,.04));border:1px solid rgba(224,25,51,.4);font-size:34px;color:var(--accent)">✓</div>
+    <div class="h1" style="margin-top:20px">You're booked.</div>
+    <div class="lead">${s.nm} · ${v.nm}<br>Sat Jun ${state.booking.day} at ${state.booking.time}</div>
+    <button class="btn ghost mt" style="margin-top:22px" onclick="toast('Added to your calendar')">Add to calendar</button>
+
+    <div class="card mt" style="margin-top:22px;text-align:left">
+      <div class="h2">Keep it on schedule</div>
+      <div class="muted" style="font-size:12.5px;margin-top:5px;line-height:1.5">Most members keep the ${shortNm} on a 4-week rhythm. Auto-book the same slot and never think about it again.</div>
+      <div class="switch mt" style="margin-top:13px" onclick="toggleRebook()">
+        <span style="font-weight:600;font-size:13.5px">Repeat every 4 weeks</span>
+        <span class="toggle ${state.rebook?'on':''}"></span>
+      </div>
+    </div>
+
+    <button class="btn primary mt" style="margin-top:16px" onclick="go('home')">Done</button>
+  </div>`;
+}
+function toggleRebook(){state.rebook=!state.rebook;if(state.rebook)toast('Recurring service set. <b>That is recurring revenue.</b>');render()}
+
+/* ---------- membership ---------- */
+function membership(){
+  return `<div class="pad">
+    <button class="back" onclick="go('home')">‹ Home</button>
+    <div class="eyebrow">Membership</div>
+    <div class="h1">Turn upkeep into a plan</div>
+    <div class="lead">Predictable care for your fleet. Cancel anytime. Annual members save a month.</div>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:18px">
+      ${tiers.map(t=>`
+        <div class="tier ${t.feat?'feat':''}">
+          ${t.feat?'<span class="tag" style="margin:0 0 8px">Most popular</span><br>':''}
+          <div class="tname">${t.nm}</div>
+          <div class="price">${money(t.pr)}<span> / month</span></div>
+          <div class="val">${t.val}</div>
+          <ul>${t.feats.map(f=>`<li>${f}</li>`).join('')}</ul>
+          <button class="btn ${t.feat?'primary':'ghost'}" onclick="subscribe('${t.nm}',${t.pr})">${state.tier===t.nm?'Current plan':'Choose '+t.nm}</button>
+        </div>`).join('')}
+    </div>
+
+    <div class="divider"></div>
+    <div class="eyebrow">Prefer to prepay</div>
+    <div class="card mt" style="margin-top:12px">
+      <div class="between"><div><div class="h2">6-Wash credit pack</div><div class="muted" style="font-size:12px;margin-top:3px">Maintenance washes · use on any vehicle</div></div>
+      <div style="text-align:right"><div class="h2">$480</div><div class="val" style="color:var(--accent)">save $90</div></div></div>
+      <button class="btn ghost mt" style="margin-top:13px" onclick="buyPack()">Buy 6 credits</button>
+    </div>
+    ${footer()}
+  </div>`;
+}
+function subscribe(nm,pr){
+  const wasNew = state.tier!==nm;
+  state.tier=nm;
+  if(wasNew){state.owner.mrr+=pr;state.owner.members+=1;}
+  toast('Welcome to <b>'+nm+'</b>. Flip to Owner to see the impact');
+  render();
+}
+function buyPack(){state.credits+=6;toast('6 credits added to your account');render()}
+
+/* ---------- quote ---------- */
+const quoteTypes=[
+  {id:'ppf',nm:'Paint Protection Film',ds:'Invisible film vs rock chips',ic:'layers'},
+  {id:'cc',nm:'Ceramic Coating',ds:'9H nano protection + gloss',ic:'diamond'},
+  {id:'tint',nm:'Window Tint',ds:'Ceramic IR-rejecting film',ic:'window'},
+  {id:'armor',nm:'Ultimate Armor',ds:'PPF + coating · lifetime warranty',ic:'shield'},
+];
+const coverages={
+  ppf:[['Front Bumper',1200],['Full Front',2400],['Track Pack',3600],['Full Car',7500]],
+  cc:[['Bronze (2yr)',900],['Gold (5yr)',1600],['ION (lifetime)',2600]],
+  tint:[['Front 2 windows',180],['Full vehicle',520],['Windshield IR',650]],
+  armor:[['Full Front + Coat',4200],['Full Car + Coat',9800]],
+};
+function openQuote(){state.quote={type:null,coverage:null};go('quote')}
+function quote(){
+  const v=curVeh();
+  return `<div class="pad">
+    <button class="back" onclick="go('home')">‹ Home</button>
+    <div class="eyebrow">Protection quote</div>
+    <div class="h1">What are we protecting?</div>
+    <div class="muted mts" style="font-size:12.5px;margin-top:8px">Vehicle: ${v.nm} · ${v.sub}</div>
+    <div style="display:flex;flex-direction:column;gap:9px;margin-top:16px">
+      ${quoteTypes.map(q=>`<div class="selrow ${state.quote.type===q.id?'sel':''}" onclick="pickQuote('${q.id}')">
+        <div class="vic" style="width:34px;height:34px;border-radius:10px;background:var(--surface2)">${svg(q.ic,{s:18})}</div>
+        <div><div class="nm">${q.nm}</div><div class="ds">${q.ds}</div></div></div>`).join('')}
+    </div>
+    ${state.quote.type?`
+      <div class="eyebrow mt" style="margin-top:22px">Coverage</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+        ${coverages[state.quote.type].map(c=>`<div class="selrow ${state.quote.coverage===c[0]?'sel':''}" onclick="pickCoverage('${c[0]}',${c[1]})">
+          <div class="nm">${c[0]}</div><div class="pr">from ${money(c[1])}</div></div>`).join('')}
+      </div>`:''}
+  </div>
+  ${state.quote.type&&state.quote.coverage?`<div class="cta-bar">
+    <button class="btn primary" onclick="go('quoteResult')">See my estimate</button></div>`:''}`;
+}
+function pickQuote(id){state.quote.type=id;state.quote.coverage=null;render()}
+function pickCoverage(nm,pr){state.quote.coverage=nm;state.quote.price=pr;render()}
+
+function quoteResult(){
+  const q=quoteTypes.find(x=>x.id===state.quote.type);
+  const v=curVeh();
+  const low=state.quote.price, high=Math.round(low*1.25/100)*100;
+  return `<div class="pad">
+    <button class="back" onclick="go('quote')">‹ Quote</button>
+    <div class="eyebrow">Your estimate</div>
+    <div class="h1">${q.nm} · ${state.quote.coverage}</div>
+    <div class="card dark glossy mt" style="margin-top:16px;text-align:center;padding:26px">
+      <div class="muted" style="font-size:12px">Estimated range for your ${v.nm.split(' ').slice(-1)[0]}</div>
+      <div class="h1" style="font-size:34px;margin-top:8px">${money(low)} – ${money(high)}</div>
+      <div class="muted" style="font-size:11.5px;margin-top:6px">Final price confirmed at consult · 10% member discount applied</div>
+    </div>
+    <div class="checkline mt" style="margin-top:18px"><span class="ck">✓</span> Documented on your Carfax appearance record</div>
+    <div class="checkline"><span class="ck">✓</span> Reserve your install slot with a refundable deposit</div>
+  </div>
+  <div class="cta-bar">
+    <button class="btn primary" onclick="reserveConsult()">Reserve install consult</button>
+  </div>`;
+}
+function reserveConsult(){
+  state.owner.pipeline+=state.quote.price;
+  toast('Consult reserved. <b>Added to the shop pipeline.</b>');
+  go('home');
+}
+
+/* ---------- owner ---------- */
+function ownerScreen(){
+  const o=state.owner;
+  const barsData=[4900,5400,5800,6300,6850,o.mrr];
+  const max=Math.max(...barsData);
+  return `<div class="pad">
+    <div class="eyebrow">Owner view</div>
+    <div class="h1">Your recurring revenue</div>
+    <div class="lead">The money this builds that single washes never do.</div>
+
+    <div class="kpi mt" style="margin-top:18px">
+      <div class="card"><div class="lab">Monthly recurring</div><div class="num" style="color:var(--accent)">${money(o.mrr)}</div><div class="delta">▲ from member plans</div></div>
+      <div class="card"><div class="lab">Active members</div><div class="num">${o.members}</div><div class="delta">▲ retained monthly</div></div>
+      <div class="card"><div class="lab">Booked this week</div><div class="num">${o.weekBookings}</div><div class="delta" style="color:var(--muted)">prepaid · no no-shows</div></div>
+      <div class="card"><div class="lab">Quote pipeline</div><div class="num">${money(o.pipeline)}</div><div class="delta" style="color:var(--muted)">open PPF & coatings</div></div>
+    </div>
+
+    <div class="card mt" style="margin-top:14px">
+      <div class="between"><span class="h2">MRR last 6 months</span><span class="pill"><span class="dot"></span> live</span></div>
+      <div class="chart">
+        ${barsData.map((v,i)=>`<div class="bar ${i===5?'hl':''}" style="height:${Math.round(v/max*100)}%"><span>${i===5?'Now':['Jan','Feb','Mar','Apr','May',''][i]}</span></div>`).join('')}
+      </div>
+    </div>
+
+    <div class="eyebrow mt2" style="margin-top:26px">Recent activity</div>
+    <div class="feed mt" style="margin-top:12px">
+      <div class="fitem"><div class="fic">${svg('star',{s:16})}</div><div><div class="ft">New Signature member</div><div class="fs">Auto-renews monthly</div></div><div class="fv">+$249</div></div>
+      <div class="fitem"><div class="fic">${svg('car',{s:16})}</div><div><div class="ft">Concierge booking · Sat</div><div class="fs">Pickup & delivery</div></div><div class="fv">+$340</div></div>
+      <div class="fitem"><div class="fic">${svg('shield',{s:16})}</div><div><div class="ft">PPF quote reserved</div><div class="fs">Consult on the books</div></div><div class="fv">+$4,200</div></div>
+      <div class="fitem"><div class="fic">${svg('loop',{s:16})}</div><div><div class="ft">12 cars on 4-week repeat</div><div class="fs">Books itself</div></div><div class="fv">recurring</div></div>
+    </div>
+
+    <div class="card mt" style="margin-top:18px">
+      <div class="h2">Today vs with this</div>
+      <div class="checkline" style="color:var(--bad)"><span class="ck" style="color:var(--bad)">✕</span> Text back in a few days · check the paper book</div>
+      <div class="checkline"><span class="ck">✓</span> Customers self-book, prepay, and auto-rebook</div>
+    </div>
+    ${footer()}
+  </div>`;
+}
+
+/* ---------- footer ---------- */
+function footer(){
+  return `<div class="footer">
+    <div class="fw">Carmel Valley Technologies</div>
+    <div class="fm">Concept prototype prepared for A Brilliant Shine · Ceramic Pro Elite of Carmel Valley.<br>Not a live booking system. Tap Owner to see the revenue view.</div>
+  </div>`;
+}
+
+/* ---------- router ---------- */
+function render(){
+  const map={
+    home:homeScreen, vehicleEdit, bookService, bookTime, bookLogistics, bookPay, bookConfirm,
+    membership, quote, quoteResult, owner:ownerScreen,
+  };
+  app.innerHTML = (map[state.screen]||homeScreen)();
+}
+render();
+</script>
+</body>
+</html>
